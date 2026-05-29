@@ -1,0 +1,435 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Public+Sans:wght@500;600;700;800&display=swap");
+@import "tailwindcss";
+
+:root {
+  color: #1a1c1c;
+  background:
+    radial-gradient(circle at top left, rgba(140, 31, 61, 0.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(118, 90, 36, 0.1), transparent 24%),
+    linear-gradient(180deg, #fbfbfb 0%, #f4f3f1 100%);
+  font-family:
+    "Inter",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --surface: #f9f9f9;
+  --surface-low: #f3f3f3;
+  --surface-lowest: #ffffff;
+  --surface-high: #ece9e6;
+  --surface-bright: #ffffff;
+  --on-surface: #1a1c1c;
+  --on-surface-variant: #5b5d5d;
+  --primary: #6c0128;
+  --primary-container: #8c1f3d;
+  --secondary: #765a24;
+  --ghost-shadow: 0px 24px 48px rgba(26, 28, 28, 0.06);
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+@theme {
+  --font-display:
+    "Public Sans",
+    "Inter",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+}
+
+@layer components {
+  .page-shell {
+    @apply min-h-screen overflow-x-clip text-[color:var(--on-surface)];
+  }
+
+  .page-frame {
+    @apply mx-auto max-w-[1600px] overflow-x-clip px-4 py-5 sm:px-6 lg:px-8;
+  }
+
+  .glass-nav {
+    background: rgba(249, 249, 249, 0.72);
+    backdrop-filter: blur(16px);
+    box-shadow: var(--ghost-shadow);
+    @apply px-5 py-5;
+  }
+
+  .hero-shell {
+    background:
+      linear-gradient(135deg, rgba(108, 1, 40, 0.94), rgba(140, 31, 61, 0.82)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0));
+    box-shadow: var(--ghost-shadow);
+    @apply relative overflow-hidden px-6 py-7 text-white sm:px-8 sm:py-9;
+  }
+
+  .hero-shell::after {
+    content: "";
+    background: linear-gradient(90deg, rgba(118, 90, 36, 0.95), rgba(118, 90, 36, 0.3));
+    @apply absolute bottom-7 left-8 h-[2px] w-14;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    @apply max-w-4xl text-[2.4rem] font-semibold sm:text-[3.1rem];
+  }
+
+  .hero-copy {
+    @apply mt-4 max-w-3xl text-sm leading-7 text-white/82 sm:text-[0.98rem];
+  }
+
+  .section-surface {
+    background: var(--surface-low);
+    box-shadow: var(--ghost-shadow);
+    @apply p-6;
+  }
+
+  .page-title-shell {
+    background: transparent;
+    @apply px-1 py-1;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    @apply text-[2.3rem] font-semibold text-[color:var(--on-surface)] sm:text-[2.9rem];
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    @apply mt-2 text-[1.7rem] font-semibold tracking-[-0.02em] text-[color:var(--on-surface)];
+  }
+
+  .field-label {
+    @apply mb-2 block text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[color:var(--on-surface-variant)];
+  }
+
+  .field-input,
+  .field-select,
+  .field-textarea {
+    background: var(--surface-high);
+    border: 0;
+    box-shadow: inset 0 0 0 1px rgba(26, 28, 28, 0.05);
+    @apply w-full px-4 py-3 text-[color:var(--on-surface)] outline-none transition placeholder:text-stone-400;
+  }
+
+  .field-input:focus,
+  .field-select:focus,
+  .field-textarea:focus {
+    box-shadow:
+      inset 3px 0 0 var(--primary),
+      inset 0 0 0 1px rgba(108, 1, 40, 0.08);
+  }
+
+  .topnav-link {
+    @apply inline-flex items-center px-4 py-2 text-sm font-semibold italic text-[color:var(--on-surface-variant)] transition;
+  }
+
+  .topnav-link:hover {
+    background: rgba(255, 255, 255, 0.52);
+    color: var(--on-surface);
+  }
+
+  .topnav-link.active {
+    background: transparent;
+    color: var(--on-surface);
+    box-shadow: inset 0 -2px 0 rgba(26, 28, 28, 0.35);
+  }
+
+  .primary-button {
+    background: linear-gradient(135deg, var(--primary), var(--primary-container));
+    @apply px-4 py-3 text-sm font-semibold text-white transition;
+  }
+
+  .primary-button:hover {
+    filter: saturate(1.05) brightness(1.02);
+  }
+
+  .secondary-button {
+    background: rgba(255, 255, 255, 0.66);
+    @apply px-4 py-3 text-sm font-semibold text-[color:var(--primary)] transition;
+  }
+
+  .secondary-button:hover {
+    background: var(--surface-high);
+  }
+
+  .ghost-button {
+    background: rgba(255, 255, 255, 0.8);
+    @apply px-4 py-3 text-sm font-semibold text-[color:var(--on-surface)] transition;
+  }
+
+  .ghost-button:hover {
+    background: var(--surface-bright);
+    box-shadow: var(--ghost-shadow);
+  }
+
+  .danger-button {
+    background: rgba(140, 31, 61, 0.08);
+    color: var(--primary-container);
+    @apply px-4 py-3 text-sm font-semibold transition;
+  }
+
+  .danger-button:hover {
+    background: rgba(140, 31, 61, 0.14);
+  }
+
+  .status-chip {
+    @apply rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em];
+    background: rgba(22, 101, 52, 0.09);
+    color: #166534;
+  }
+
+  .status-chip.running {
+    background: rgba(118, 90, 36, 0.12);
+    color: var(--secondary);
+  }
+
+  .status-chip.review {
+    background: rgba(108, 1, 40, 0.08);
+    color: var(--primary);
+  }
+
+  .result-chip {
+    background: rgba(255, 255, 255, 0.76);
+    @apply px-3 py-2 text-xs font-medium text-[color:var(--on-surface-variant)];
+  }
+
+  .metric-tile {
+    background: var(--surface-lowest);
+    @apply px-4 py-4;
+  }
+
+  .metric-kicker {
+    @apply text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--on-surface-variant)];
+  }
+
+  .list-card {
+    background: rgba(255, 255, 255, 0.8);
+    @apply px-4 py-4 transition;
+  }
+
+  .list-card:hover {
+    background: var(--surface-bright);
+    box-shadow: var(--ghost-shadow);
+  }
+
+  .modal-backdrop {
+    background: rgba(26, 28, 28, 0.28);
+    backdrop-filter: blur(6px);
+    @apply fixed inset-0 z-40;
+  }
+
+  .modal-shell {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+  }
+
+  .modal-panel {
+    background: var(--surface);
+    box-shadow: var(--ghost-shadow);
+    @apply max-h-[85vh] w-full max-w-6xl overflow-y-auto p-6;
+  }
+
+  .sequence-step {
+    background: rgba(255, 255, 255, 0.86);
+    @apply grid grid-cols-[40px_minmax(0,1fr)] gap-3 px-3 py-3;
+  }
+
+  .sequence-step__rail {
+    @apply flex min-h-full flex-col items-center;
+  }
+
+  .sequence-step__index {
+    background: linear-gradient(135deg, var(--primary), var(--primary-container));
+    @apply inline-flex h-7 w-7 items-center justify-center text-[11px] font-semibold text-white;
+  }
+
+  .sequence-step__line {
+    background: rgba(108, 1, 40, 0.12);
+    @apply mt-2 w-px flex-1;
+  }
+
+  .sequence-step__content {
+    @apply min-w-0;
+  }
+
+  .sequence-step__method {
+    background: rgba(108, 1, 40, 0.06);
+    color: var(--primary);
+    @apply inline-flex px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.16em];
+  }
+
+  .sequence-step__details {
+    @apply min-w-0;
+  }
+
+  .sequence-step__summary {
+    @apply flex cursor-pointer list-none flex-wrap items-center gap-2;
+  }
+
+  .sequence-step__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .sequence-step__target {
+    @apply mt-2 block min-w-0 overflow-hidden text-sm font-medium leading-6 text-[color:var(--on-surface)];
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .sequence-step__target.collapsed {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  .sequence-step__target--expanded {
+    display: none;
+  }
+
+  .sequence-step__details[open] .sequence-step__target.collapsed {
+    display: none;
+  }
+
+  .sequence-step__details[open] .sequence-step__target--expanded {
+    display: block;
+  }
+
+  .sequence-step__toggle {
+    background: rgba(255, 255, 255, 0.85);
+    @apply inline-flex h-7 w-7 items-center justify-center text-[color:var(--on-surface-variant)] transition;
+  }
+
+  .sequence-step__toggle:hover {
+    background: var(--surface-high);
+    color: var(--primary);
+  }
+
+  .sequence-step__toggle-icon {
+    @apply block h-2.5 w-2.5 border-b-2 border-r-2 border-current transition-transform duration-200;
+    transform: rotate(45deg) translateY(-1px);
+  }
+
+  .sequence-step__toggle-icon.expanded {
+    transform: rotate(-135deg) translateX(-1px);
+  }
+
+  .ai-markdown {
+    @apply text-sm leading-7 text-[color:var(--on-surface)];
+  }
+
+  .ai-markdown h1 {
+    font-family: var(--font-display);
+    @apply mt-2 text-2xl font-semibold tracking-[-0.02em];
+  }
+
+  .ai-markdown h2 {
+    font-family: var(--font-display);
+    @apply mt-6 text-xl font-semibold tracking-[-0.02em];
+  }
+
+  .ai-markdown h3 {
+    font-family: var(--font-display);
+    @apply mt-5 text-lg font-semibold tracking-[-0.02em];
+  }
+
+  .ai-markdown p {
+    @apply mt-3 text-[color:var(--on-surface-variant)];
+  }
+
+  .ai-markdown ul,
+  .ai-markdown ol {
+    @apply mt-3 space-y-2 pl-5 text-[color:var(--on-surface-variant)];
+  }
+
+  .ai-markdown ul {
+    list-style: disc;
+  }
+
+  .ai-markdown ol {
+    list-style: decimal;
+  }
+
+  .ai-markdown li {
+    @apply pl-1;
+  }
+
+  .ai-markdown hr {
+    background: rgba(26, 28, 28, 0.08);
+    @apply my-5 h-px border-0;
+  }
+
+  .ai-markdown blockquote {
+    background: rgba(108, 1, 40, 0.04);
+    @apply mt-4 px-4 py-3 text-[color:var(--on-surface-variant)];
+    box-shadow: inset 3px 0 0 var(--primary);
+  }
+
+  .ai-markdown code {
+    background: #26181d;
+    @apply px-1.5 py-1 font-mono text-[0.9em] text-rose-100;
+  }
+
+  .ai-markdown pre {
+    background: #26181d;
+    @apply mt-4 overflow-x-auto p-4;
+  }
+
+  .ai-markdown pre code {
+    @apply bg-transparent p-0 text-sm leading-6 text-rose-100;
+  }
+
+  .ai-markdown-table-wrap {
+    background: rgba(255, 255, 255, 0.8);
+    @apply mt-4 overflow-x-auto;
+  }
+
+  .ai-markdown-table {
+    @apply min-w-full border-collapse text-left text-sm leading-6 text-[color:var(--on-surface-variant)];
+  }
+
+  .ai-markdown-table th {
+    background: rgba(108, 1, 40, 0.05);
+    @apply px-4 py-3 font-semibold text-[color:var(--on-surface)];
+  }
+
+  .ai-markdown-table td {
+    @apply px-4 py-3 align-top;
+  }
+}
